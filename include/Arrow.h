@@ -1,16 +1,26 @@
 #ifndef ARROW_H
 #define ARROW_H
+
+#pragma once
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
 using namespace std;
 
-class Arrow : public sf::Drawable
+class Arrow
 {
     public:
         Arrow (float x, float y);
         Arrow()=delete;
-        virtual ~Arrow() = default;
+        virtual ~Arrow();
+        Sprite aSprite;
+        Texture aTexture;
+
+        Sprite getSprite();
+        void changeAngleUp();
+        void changeAngleDown();
+        void reset();
+
 
     protected:
 

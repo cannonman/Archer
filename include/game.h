@@ -1,5 +1,5 @@
-#ifndef Gameplay_h
-#define Gameplay_h
+#ifndef GAME_H
+#define GAME_H
 
 #pragma once
 
@@ -7,6 +7,8 @@
 #include <SFML/Window.hpp>
 #include <Windows.h>
 #include <Player.h>
+#include <Arrow.h>
+#include <Bow.h>
 #include <string>
 
 using namespace std;
@@ -23,7 +25,7 @@ class Game
     protected:
 
         enum GameState{MENU,OPTIONS,GAME,GAME_OVER,END};
-		GameState state;
+        GameState state;
 
     private:
         Font font;
@@ -32,6 +34,8 @@ class Game
 	    Texture backgroundTexture;
 
 	    Player* gracz;
+	    Bow* luk;
+	    Arrow* strzala;
 
         void menu();
         void options();

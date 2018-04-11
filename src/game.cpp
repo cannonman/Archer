@@ -5,13 +5,18 @@ using namespace std;
 
 RenderWindow window(VideoMode(800,600),"Archer The Game");
 
+
 Game::Game()
 {
-
+    window.setFramerateLimit(60);
 
     state= END;
 
     gracz = new Player (-50,200);
+
+    luk = new Bow (84,340);
+
+    strzala = new Arrow (84,340);
 
     if(!font.loadFromFile("arial.ttf"))
     {
@@ -74,11 +79,25 @@ void Game::gameStart()
             if (event.type==Event::Closed || Event::KeyPressed && event.key.code == Keyboard::Escape)
                 state = END;
 
+            if (Event::KeyPressed && event.key.code == Keyboard::Up)
+            {
+                luk->changeAngleUp();
+                strzala->changeAngleUp();
+            }
+
+            if (Event::KeyPressed && event.key.code == Keyboard::Down)
+            {
+                luk->changeAngleDown();
+                strzala->changeAngleDown();
+            }
+
         }
 
         window.clear();
         window.draw(backgroundSprite);
         window.draw(gracz->getSpirte());
+        window.draw(luk->getSprite());
+        window.draw(strzala->getSprite());
         window.draw(title);
         window.display();
 
@@ -128,10 +147,10 @@ void Game::options()
                 state = END;
 
             else if (powrot.getGlobalBounds().contains(mouse) && event.type == Event::MouseButtonReleased
-                       && event.key.code == Mouse::Button::Left)
+                       && event.key.code== Mouse::Left)
                         state = MENU;
 
-            if(poziom.getGlobalBounds().contains(mouse) && event.type == Event::MouseButtonReleased && event.key.code == Mouse::Button::Left)
+            if(poziom.getGlobalBounds().contains(mouse) && event.type == Event::MouseButtonReleased && event.key.code == Mouse::Left)
             {
                 if(diff==2) diff=0;
                 else diff++;

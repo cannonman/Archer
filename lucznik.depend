@@ -393,10 +393,10 @@
 1522239516 c:\users\pc\desktop\nowy folder\lucznik\include\menu.h
 	<SFML/Graphics.hpp>
 
-1522236494 source:c:\users\pc\desktop\nowy folder\lucznik\src\arrow.cpp
+1523472869 source:c:\users\pc\desktop\nowy folder\lucznik\src\arrow.cpp
 	"Arrow.h"
 
-1522236485 c:\users\pc\desktop\nowy folder\lucznik\include\arrow.h
+1523472924 c:\users\pc\desktop\nowy folder\lucznik\include\arrow.h
 	<SFML/Graphics.hpp>
 
 1522239213 source:c:\users\pc\desktop\nowy folder\lucznik\src\menu.cpp
@@ -409,15 +409,16 @@
 1522242123 source:c:\users\pc\desktop\nowy folder\lucznik\src\engine.cpp
 	"Engine.h"
 
-1522855900 c:\users\pc\desktop\nowy folder\lucznik\include\game.h
+1523472753 c:\users\pc\desktop\nowy folder\lucznik\include\game.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	<Windows.h>
-	<Gameplay.h>
 	<Player.h>
+	<Arrow.h>
+	<Bow.h>
 	<string>
 
-1522855900 source:c:\users\pc\desktop\nowy folder\lucznik\src\game.cpp
+1523472967 source:c:\users\pc\desktop\nowy folder\lucznik\src\game.cpp
 	"Game.h"
 	<iostream>
 
@@ -433,4 +434,10 @@
 
 1522855950 source:c:\users\pc\desktop\nowy folder\lucznik\src\player.cpp
 	"Player.h"
+
+1523471952 c:\users\pc\desktop\nowy folder\lucznik\include\bow.h
+	<SFML/Graphics.hpp>
+
+1523472772 source:c:\users\pc\desktop\nowy folder\lucznik\src\bow.cpp
+	"Bow.h"
 

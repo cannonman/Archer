@@ -1,12 +1,11 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef Gameplay_h
+#define Gameplay_h
 
 #pragma once
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <Windows.h>
-#include <Gameplay.h>
 #include <Player.h>
 #include <string>
 
@@ -24,7 +23,7 @@ class Game
     protected:
 
         enum GameState{MENU,OPTIONS,GAME,GAME_OVER,END};
-        GameState state;
+		GameState state;
 
     private:
         Font font;

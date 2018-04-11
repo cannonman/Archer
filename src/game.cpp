@@ -128,10 +128,10 @@ void Game::options()
                 state = END;
 
             else if (powrot.getGlobalBounds().contains(mouse) && event.type == Event::MouseButtonReleased
-                       && event.key.code== Mouse::Left)
+                       && event.key.code == Mouse::Button::Left)
                         state = MENU;
 
-            if(poziom.getGlobalBounds().contains(mouse) && event.type == Event::MouseButtonReleased && event.key.code == Mouse::Left)
+            if(poziom.getGlobalBounds().contains(mouse) && event.type == Event::MouseButtonReleased && event.key.code == Mouse::Button::Left)
             {
                 if(diff==2) diff=0;
                 else diff++;

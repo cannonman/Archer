@@ -5,11 +5,11 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include <Windows.h>
-#include <Player.h>
-#include <Arrow.h>
-#include <Bow.h>
+//#include <Windows.h>
 #include <string>
+#include "Player.h"
+#include "Bow.h"
+#include "Arrow.h"
 
 using namespace std;
 using namespace sf;

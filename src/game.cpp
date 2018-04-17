@@ -1,4 +1,7 @@
-#include "Game.h"
+#include "../include/game.h"
+#include "../include/Bow.h"
+#include "../include/Player.h"
+#include "../include/Arrow.h"
 #include <iostream>
 
 using namespace std;

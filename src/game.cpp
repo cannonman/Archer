@@ -1,9 +1,11 @@
 #include "../include/game.h"
 #include <iostream>
+#include <cmath>
 
 #define FRAMERATE 30
 #define MAX_ANGLE -90
 #define MIN_ANGLE 0
+#define ARROW_SPEED 10
 
 using namespace std;
 
@@ -12,17 +14,15 @@ RenderWindow window(VideoMode(800,600),"Archer The Game");
 
 Game::Game()
 {
-    window.setFramerateLimit(60);
-
     state= END;
 
     gracz = new Player (-50,200);
 
     luk = new Bow (84,340);
 
-    strzala = new Arrow (84,340);
+    strzala = new Arrow(84, 340);
 
-    obiekt = new Target (600,1);
+    obiekt = new Target (300,300);
 
     if(!font.loadFromFile("arial.ttf"))
     {
@@ -69,7 +69,7 @@ void Game::gameStart()
    // Texture backgroundTexture;
    // Sprite backgroundSpirte;
 
-    vector<Arrow*> strzaly;
+ //   vector<Arrow*> strzaly;
     backgroundTexture.loadFromFile("jungle.png");
     backgroundSprite.setTexture(backgroundTexture); //load texture
 
@@ -83,48 +83,60 @@ void Game::gameStart()
 
         Event event;
 
+
         while (window.pollEvent(event)) //wait for event
         {
+
+            vector.y = -ARROW_SPEED*sin((float)M_PI*abs(angle/180));
+            vector.x = ARROW_SPEED*cos ((float)M_PI*abs(angle/180));
 
             if (event.type==Event::Closed || Event::KeyPressed && event.key.code == Keyboard::Escape)
                 state = END; //game escape
 
             if (Event::KeyPressed && event.key.code == Keyboard::Up)
             {
-                if (luk->getAngle()-2.5>=MAX_ANGLE) {
-                    luk->changeAngleUp();
-                    strzala->changeAngleUp(); //lift bow  and arrow up
+                if (angle-2.5>=MAX_ANGLE) {
+                    angle-=2.5;
+                    luk->setAngle(angle);
+                    if (!strzala->ifReleased()){
+
+                        strzala->setAngle(angle); //lift bow  and arrow up
+                    }
+
                 }
-                cout << luk->getAngle() << endl;
             }
 
             if (Event::KeyPressed && event.key.code == Keyboard::Down)
             {
-                if (luk->getAngle()+2.5<=MIN_ANGLE) {
-                    luk->changeAngleDown();
-                    strzala->changeAngleDown(); //lift bow and arrow down
+                if (angle+2.5<=MIN_ANGLE) {
+                    angle +=2.5;
+                    luk->setAngle(angle);
+
+                    if (!strzala->ifReleased()){
+                        strzala->setAngle(angle); //lift bow and arrow down
+
                 }
-                cout << luk->getAngle() << endl;
+                }
             }
 
-            if (Mouse::isButtonPressed(Mouse::Left))
+            if (Event::KeyPressed && event.key.code == Keyboard::Space)
             {
 
+                strzala->release();
 
+                /*
 
                 mousePos = Vector2f(Mouse::getPosition(window)); //mouse vector set
                 playerPos= gracz -> pozycja; //player vector set
-                aimDir = mousePos - playerPos; //
-                x=(sqrt( pow(aimDir.x,2)+pow(aimDir.y,2)));
-                aimDirNorm = Vector2f(aimDir.x/x,aimDir.y/x);
-               // cout<<strzaly.size()<<endl;
+                aimDir = mousePos - playerPos; //celowanie
+                x=(sqrt( pow(aimDir.x,2)+pow(aimDir.y,2))); //dlugosc wektora celowania
+                aimDirNorm = Vector2f(aimDir.x,aimDir.y);
 
-                window.draw(test.getSprite());
+               // cout<<strzaly.size()<<endl;
 
                 strzaly.push_back(strzala);
                // cout<<strzaly.size()<<endl;
-
-                strzala->aSprite.setPosition(playerPos);
+            //    strzala->aSprite.setPosition(playerPos);
                 strzala->currVelo = aimDir * strzala->maxSpeed;
 
                 //cout<<strzala->currVelo.x<<"  "<<strzala->maxSpeed<<endl;
@@ -132,7 +144,9 @@ void Game::gameStart()
                 strzaly.push_back(strzala);
                 //cout<<strzaly.size()<<endl;
 
-                for (size_t i = 0 ; i<strzaly.size(); i++)
+                 */
+                /*
+                for (size_t i = strzaly.size() - 1 ; i>0; i--)
                 {
                     strzaly[i]->aSprite.move(strzaly[i]->currVelo);
 
@@ -144,6 +158,17 @@ void Game::gameStart()
 
                 }
                 //cout<<strzaly.size()<<endl;
+
+*/              if (strzala->aSprite.getPosition().x < 0 || strzala->aSprite.getPosition().x > window.getSize().x) {
+                    delete strzala;
+                    strzala = new Arrow(84, 340);
+                    strzala->setAngle(angle);
+                }
+                if (strzala->aSprite.getPosition().y < 0 || strzala->aSprite.getPosition().y > window.getSize().y) {
+                    delete strzala;
+                    strzala = new Arrow(84, 340);
+                    strzala->setAngle(angle);
+                }
 
 
 
@@ -157,6 +182,7 @@ void Game::gameStart()
         window.draw(backgroundSprite);
         window.draw(gracz->getSpirte());
         window.draw(luk->getSprite());
+        window.draw(strzala->getSprite());
         //cout<<"xd"<<endl;
 
         //cout<<czas(clock());
@@ -188,11 +214,18 @@ void Game::gameStart()
         }
         else if(czas(clock())%5!=0) {a=0;}
 
+        if (strzala->ifReleased()){
+
+            strzala->aSprite.move(vector);
+        }
+/*
         for (size_t i = 0 ;i<strzaly.size();i++)
         {
             window.draw(strzala->getSprite());
             //cout<<"??"<<endl;
         }
+
+        */
         window.draw(strzala->getSprite());
         window.draw(obiekt->getSprite());
         window.draw(title);

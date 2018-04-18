@@ -4,6 +4,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <math.h>
+#define BEGIN_X
 
 using namespace sf;
 using namespace std;
@@ -16,22 +17,30 @@ class Arrow
         virtual ~Arrow();
         Sprite aSprite;
         Texture aTexture;
+        float beginX, beginY;
 
         Vector2f currVelo;
         float maxSpeed;
 
+        void release();
+
         Sprite getSprite();
         void changeAngleUp();
+        void setAngle(float angle);
         void changeAngleDown();
-        void reset();
+        void resetPosition();
         bool ifReleased();
+        int getBeginX();
+        int getBeginY();
 
 
-    protected:
+protected:
+
 
     private:
         RectangleShape arrow;
         bool released;
+
 };
 
 #endif // ARROW_H

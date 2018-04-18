@@ -16,13 +16,16 @@ class Bow
 
         void changeAngleUp();
         void changeAngleDown();
+        float getAngle();
+        void setAngle(float angle);
+
         void reset();
         Sprite getSprite();
 
         virtual ~Bow();
 
     protected:
-
+        float angle;
     private:
 
 };

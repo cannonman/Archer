@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cmath>
 
-#define FRAMERATE 30
+#define FRAMERATE 60
 #define MAX_ANGLE -90
 #define MIN_ANGLE 0
 #define ARROW_SPEED 10

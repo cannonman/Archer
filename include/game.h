@@ -7,10 +7,10 @@
 #include <SFML/Window.hpp>
 //#include <windows.h>
 #include <string>
-#include <math.h>
+#include <cmath>
 #include <iostream>
 #include <vector>
-#include <time.h>
+#include <ctime>
 #include <cstdio>
 #include "../include/Target.h"
 #include "../include/Player.h"
@@ -49,6 +49,7 @@ class Game
 	    Vector2f playerPos;
 	    Vector2f aimDir;
 	    Vector2f aimDirNorm;
+	    Vector2f vector;
 
 	    Player* gracz;
 	    Bow* luk;
@@ -60,6 +61,7 @@ class Game
         void gameStart();
         int czas(clock_t t);
         int a=0;
+        float angle;
 };
 
 #endif // GAME_H

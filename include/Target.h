@@ -7,6 +7,7 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 using namespace std;
 using namespace sf;
@@ -19,8 +20,12 @@ public:
     Texture getTexture();
     void setSpeed(float speed);
     void increaseSpeed(float speed);
-private:
     Sprite aSprite;
+
+    void objMove();
+    Vector2f objPos();
+private:
+
     Texture aTexture;
     float targetSpeed;
 };

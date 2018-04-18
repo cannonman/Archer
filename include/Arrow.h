@@ -3,6 +3,7 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
 using namespace sf;
 using namespace std;
@@ -15,6 +16,9 @@ class Arrow
         virtual ~Arrow();
         Sprite aSprite;
         Texture aTexture;
+
+        Vector2f currVelo;
+        float maxSpeed;
 
         Sprite getSprite();
         void changeAngleUp();

@@ -5,11 +5,18 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-//#include <Windows.h>
+#include <windows.h>
+#include <Player.h>
+#include <Arrow.h>
+#include <Bow.h>
 #include <string>
-#include "Player.h"
-#include "Bow.h"
-#include "Arrow.h"
+#include <math.h>
+#include <iostream>
+#include <vector>
+#include <time.h>
+#include <cstdio>
+#include <Target.h>
+
 
 using namespace std;
 using namespace sf;
@@ -32,14 +39,23 @@ class Game
         int diff;
         Sprite backgroundSprite;
 	    Texture backgroundTexture;
+	    double x;
+
+	    Vector2f mousePos;
+	    Vector2f playerPos;
+	    Vector2f aimDir;
+	    Vector2f aimDirNorm;
 
 	    Player* gracz;
 	    Bow* luk;
 	    Arrow* strzala;
+	    Target* obiekt;
 
         void menu();
         void options();
         void gameStart();
+        int czas(clock_t t);
+        int a=0;
 };
 
 #endif // GAME_H

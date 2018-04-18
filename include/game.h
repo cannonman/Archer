@@ -12,12 +12,13 @@
 #include <vector>
 #include <ctime>
 #include <cstdio>
-#include "../include/Target.h"
-#include "../include/Player.h"
-#include "../include/Target.h"
-#include "../include/Arrow.h"
-#include "../include/Bow.h"
-
+#include "Target.h"
+#include "Player.h"
+#include "Target.h"
+#include "Arrow.h"
+#include "Bow.h"
+#define _USE_MATH_DEFINES
+#include "Collision.h"
 
 using namespace std;
 using namespace sf;
@@ -32,15 +33,16 @@ class Game
 
     protected:
 
-        enum GameState{MENU,OPTIONS,GAME,GAME_OVER,END};
+        enum GameState{MENU,OPTIONS,GAME,GAME_OVER,END,TARGETHIT};
         GameState state;
 
     private:
         Font font;
-        int diff;
+
         Sprite backgroundSprite;
 	    Texture backgroundTexture;
 	    double x;
+	    bool kolizja;
 
 	    Clock mainClock;
 	    Time elapsed;
@@ -61,7 +63,10 @@ class Game
         void gameStart();
         int czas(clock_t t);
         int a=0;
+        int points;
         float angle;
+        int time;
+        int diff;
 };
 
 #endif // GAME_H

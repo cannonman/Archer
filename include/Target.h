@@ -21,8 +21,11 @@ public:
     void setSpeed(float speed);
     void increaseSpeed(float speed);
     Sprite aSprite;
+    int getX();
+    int getY();
 
     void objMove();
+    void resetPosition();
     Vector2f objPos();
 private:
 

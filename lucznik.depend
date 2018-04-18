@@ -455,3 +455,62 @@
 1524048833 source:c:\users\pc\desktop\nowy folder\lucznik\src\target.cpp
 	"../include/Target.h"
 
+1524047946 source:c:\users\pc\desktop\nowy folder\archer-master\main.cpp
+	"include/game.h"
+
+1524086406 c:\users\pc\desktop\nowy folder\archer-master\include\game.h
+	<SFML/Graphics.hpp>
+	<SFML/Window.hpp>
+	<string>
+	<cmath>
+	<iostream>
+	<vector>
+	<ctime>
+	<cstdio>
+	"Target.h"
+	"Player.h"
+	"Target.h"
+	"Arrow.h"
+	"Bow.h"
+	"Collision.h"
+
+1524086007 c:\users\pc\desktop\nowy folder\archer-master\include\target.h
+	<SFML/Graphics.hpp>
+	<iostream>
+
+1524047946 c:\users\pc\desktop\nowy folder\archer-master\include\player.h
+	<SFML/Graphics.hpp>
+	<SFML/Window.hpp>
+	<iostream>
+
+1524047946 c:\users\pc\desktop\nowy folder\archer-master\include\arrow.h
+	<SFML/Graphics.hpp>
+	<math.h>
+
+1524047946 c:\users\pc\desktop\nowy folder\archer-master\include\bow.h
+	<SFML/Graphics.hpp>
+
+1524081475 source:c:\users\pc\desktop\nowy folder\archer-master\src\arrow.cpp
+	"Arrow.h"
+
+1524081475 source:c:\users\pc\desktop\nowy folder\archer-master\src\bow.cpp
+	"Bow.h"
+
+1524086980 source:c:\users\pc\desktop\nowy folder\archer-master\src\game.cpp
+	"game.h"
+	<iostream>
+	<math.h>
+
+1524081475 source:c:\users\pc\desktop\nowy folder\archer-master\src\player.cpp
+	"Player.h"
+
+1524086027 source:c:\users\pc\desktop\nowy folder\archer-master\src\target.cpp
+	"Target.h"
+
+1524083676 c:\users\pc\desktop\nowy folder\archer-master\include\collision.h
+
+1524083676 source:c:\users\pc\desktop\nowy folder\archer-master\src\collision.cpp
+	<SFML\Graphics.hpp>
+	<map>
+	"Collision.h"
+

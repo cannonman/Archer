@@ -5,17 +5,18 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include <windows.h>
-#include <Player.h>
-#include <Arrow.h>
-#include <Bow.h>
+//#include <windows.h>
 #include <string>
 #include <math.h>
 #include <iostream>
 #include <vector>
 #include <time.h>
 #include <cstdio>
-#include <Target.h>
+#include "../include/Target.h"
+#include "../include/Player.h"
+#include "../include/Target.h"
+#include "../include/Arrow.h"
+#include "../include/Bow.h"
 
 
 using namespace std;

@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "../include/game.h"
 #include <iostream>
 
 using namespace std;

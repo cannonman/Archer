@@ -1,4 +1,4 @@
-#include "Bow.h"
+#include "../include/Bow.h"
 
 Bow::Bow(float wX, float wY)
 {

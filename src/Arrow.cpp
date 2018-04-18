@@ -1,4 +1,4 @@
-#include "Arrow.h"
+#include "../include/Arrow.h"
 
 Arrow::Arrow(float x, float y) : currVelo(0.f,0.f), maxSpeed(10.f)
 {

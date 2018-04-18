@@ -1,4 +1,4 @@
-#include "../include/Arrow.h"
+#include "Arrow.h"
 
 #define BEGIN_X 84
 #define BEGIN_Y 340

@@ -54,6 +54,7 @@
 		<Unit filename="include/Arrow.h" />
 		<Unit filename="include/Bow.h" />
 		<Unit filename="include/Player.h" />
+		<Unit filename="include/Target.h" />
 		<Unit filename="include/game.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="openal32.dll" />
@@ -70,6 +71,7 @@
 		<Unit filename="src/Arrow.cpp" />
 		<Unit filename="src/Bow.cpp" />
 		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/Target.cpp" />
 		<Unit filename="src/game.cpp" />
 		<Extensions>
 			<code_completion />

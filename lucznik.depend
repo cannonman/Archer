@@ -410,7 +410,7 @@
 1522242123 source:c:\users\pc\desktop\nowy folder\lucznik\src\engine.cpp
 	"Engine.h"
 
-1524009855 c:\users\pc\desktop\nowy folder\lucznik\include\game.h
+1524048790 c:\users\pc\desktop\nowy folder\lucznik\include\game.h
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 	<windows.h>
@@ -422,8 +422,10 @@
 	<iostream>
 	<vector>
 	<time.h>
+	<cstdio>
+	<Target.h>
 
-1524011791 source:c:\users\pc\desktop\nowy folder\lucznik\src\game.cpp
+1524048790 source:c:\users\pc\desktop\nowy folder\lucznik\src\game.cpp
 	"Game.h"
 	<iostream>
 
@@ -445,4 +447,11 @@
 
 1523472772 source:c:\users\pc\desktop\nowy folder\lucznik\src\bow.cpp
 	"Bow.h"
+
+1524048671 c:\users\pc\desktop\nowy folder\lucznik\include\target.h
+	<SFML/Graphics.hpp>
+	<iostream>
+
+1524048833 source:c:\users\pc\desktop\nowy folder\lucznik\src\target.cpp
+	"../include/Target.h"
 

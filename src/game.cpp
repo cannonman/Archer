@@ -1,7 +1,4 @@
-#include "../include/game.h"
-#include "../include/Bow.h"
-#include "../include/Player.h"
-#include "../include/Arrow.h"
+#include "Game.h"
 #include <iostream>
 
 using namespace std;
@@ -20,6 +17,8 @@ Game::Game()
     luk = new Bow (84,340);
 
     strzala = new Arrow (84,340);
+
+    obiekt = new Target (600,1);
 
     if(!font.loadFromFile("arial.ttf"))
     {
@@ -64,6 +63,7 @@ void Game::gameStart()
    // Texture backgroundTexture;
    // Sprite backgroundSpirte;
 
+    vector<Arrow*> strzaly;
     backgroundTexture.loadFromFile("jungle.png");
     backgroundSprite.setTexture(backgroundTexture);
 
@@ -94,13 +94,93 @@ void Game::gameStart()
                 strzala->changeAngleDown();
             }
 
+            if (Mouse::isButtonPressed(Mouse::Left))
+            {
+
+
+
+                mousePos = Vector2f(Mouse::getPosition(window));
+                playerPos= gracz -> pozycja;
+                aimDir = mousePos - playerPos;
+                x=(sqrt( pow(aimDir.x,2)+pow(aimDir.y,2)));
+                aimDirNorm = Vector2f(aimDir.x/x,aimDir.y/x);
+               // cout<<strzaly.size()<<endl;
+
+
+                strzaly.push_back(strzala);
+               // cout<<strzaly.size()<<endl;
+
+                strzala->aSprite.setPosition(playerPos);
+                strzala->currVelo = aimDir * strzala->maxSpeed;
+
+                //cout<<strzala->currVelo.x<<"  "<<strzala->maxSpeed<<endl;
+
+                strzaly.push_back(strzala);
+                //cout<<strzaly.size()<<endl;
+
+                for (size_t i = 0 ; i<strzaly.size(); i++)
+                {
+                    strzaly[i]->aSprite.move(strzaly[i]->currVelo);
+
+                    if (strzaly[i]->aSprite.getPosition().x < 0 || strzaly[i]->aSprite.getPosition().x > window.getSize().x ||
+                        strzaly[i]->aSprite.getPosition().y < 0 || strzaly[i]->aSprite.getPosition().y > window.getSize().y )
+                    {
+                        strzaly.erase(strzaly.begin() + i);
+                    }
+
+                }
+                //cout<<strzaly.size()<<endl;
+
+
+
+                //cout<< aimDirNorm.x << " " <<aimDirNorm.y <<endl;
+
+            }
+
         }
 
         window.clear();
         window.draw(backgroundSprite);
         window.draw(gracz->getSpirte());
         window.draw(luk->getSprite());
+        //cout<<"xd"<<endl;
+
+        //cout<<czas(clock());
+       // cout<<czas(clock())<<endl;
+
+
+
+        if (a==0)
+        {
+        if (obiekt->aSprite.getPosition().y<600&& czas(clock())%5==0)
+        {
+
+            obiekt->objMove();
+            //cout<<"XDD"<<endl;
+            cout<<a<<endl;
+
+            a++;
+            cout<<a<<endl;
+
+
+
+
+
+        }
+        if (obiekt->aSprite.getPosition().y>600)
+        {
+            cout<<"Obiekt poza obszarem, koniec gry"<<endl;
+        }
+        }
+        else if(czas(clock())%5!=0) {a=0;}
+
+        for (size_t i = 0 ;i<strzaly.size();i++)
+        {
+            window.draw(strzala->getSprite());
+            //cout<<"??"<<endl;
+        }
         window.draw(strzala->getSprite());
+        window.draw(obiekt->getSprite());
         window.draw(title);
         window.display();
 
@@ -250,4 +330,9 @@ void Game::menu()
             window.display();
       }
 
+}
+
+int Game::czas (clock_t t)
+{
+    return static_cast <int> (t) / CLOCKS_PER_SEC;
 }

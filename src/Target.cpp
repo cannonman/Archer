@@ -30,3 +30,18 @@ Sprite Target::getSprite(){
 Texture Target::getTexture(){
     return aTexture;
 }
+
+void Target::objMove()
+{
+
+    aSprite.move(0,100);
+    cout<<"ruch"<<endl;
+
+}
+
+Vector2f Target::objPos()
+{
+
+ return Vector2f(aSprite.getPosition().x,aSprite.getPosition().y);
+
+}

@@ -1,6 +1,6 @@
-#include "../include/Arrow.h"
+#include "Arrow.h"
 
-Arrow::Arrow(float x, float y)
+Arrow::Arrow(float x, float y) : currVelo(0.f,0.f), maxSpeed(10.f)
 {
 
     aTexture.loadFromFile("arrowDef.png");

@@ -1,4 +1,4 @@
-#include "../include/Player.h"
+#include "Player.h"
 
 Player::Player(float startX, float startY)
 {
@@ -6,6 +6,8 @@ Player::Player(float startX, float startY)
     pSprite.setTexture(pTexture);
 
     pSprite.setPosition(startX,startY);
+
+    pozycja = Vector2f (pSprite.getPosition().x, pSprite.getPosition().y);
 }
 
 Player::~Player()

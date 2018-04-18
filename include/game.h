@@ -42,6 +42,9 @@ class Game
 	    Texture backgroundTexture;
 	    double x;
 
+	    Clock mainClock;
+	    Time elapsed;
+
 	    Vector2f mousePos;
 	    Vector2f playerPos;
 	    Vector2f aimDir;

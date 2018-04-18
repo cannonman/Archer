@@ -1,6 +1,8 @@
 #include "../include/game.h"
 #include <iostream>
 
+#define FRAMERATE 30
+
 using namespace std;
 
 RenderWindow window(VideoMode(800,600),"Archer The Game");
@@ -65,33 +67,34 @@ void Game::gameStart()
 
     vector<Arrow*> strzaly;
     backgroundTexture.loadFromFile("jungle.png");
-    backgroundSprite.setTexture(backgroundTexture);
+    backgroundSprite.setTexture(backgroundTexture); //load texture
 
     while (state != END)
     {
+        mainClock.restart(); //start time measure
         Text title ("Archer The Game",font,30);
         title.setStyle(Text::Bold);
-        title.setPosition(800/2-title.getGlobalBounds().width/2,20);
+        title.setPosition(800/2-title.getGlobalBounds().width/2,20); //setting window options
 
 
         Event event;
 
-        while (window.pollEvent(event))
+        while (window.pollEvent(event)) //wait for event
         {
 
             if (event.type==Event::Closed || Event::KeyPressed && event.key.code == Keyboard::Escape)
-                state = END;
+                state = END; //game escape
 
             if (Event::KeyPressed && event.key.code == Keyboard::Up)
             {
                 luk->changeAngleUp();
-                strzala->changeAngleUp();
+                strzala->changeAngleUp(); //lift bow  and arrow up
             }
 
             if (Event::KeyPressed && event.key.code == Keyboard::Down)
             {
                 luk->changeAngleDown();
-                strzala->changeAngleDown();
+                strzala->changeAngleDown(); //lift bow and arrow down
             }
 
             if (Mouse::isButtonPressed(Mouse::Left))
@@ -99,12 +102,13 @@ void Game::gameStart()
 
 
 
-                mousePos = Vector2f(Mouse::getPosition(window));
-                playerPos= gracz -> pozycja;
-                aimDir = mousePos - playerPos;
+                mousePos = Vector2f(Mouse::getPosition(window)); //mouse vector set
+                playerPos= gracz -> pozycja; //player vector set
+                aimDir = mousePos - playerPos; //
                 x=(sqrt( pow(aimDir.x,2)+pow(aimDir.y,2)));
                 aimDirNorm = Vector2f(aimDir.x/x,aimDir.y/x);
                // cout<<strzaly.size()<<endl;
+
 
 
                 strzaly.push_back(strzala);
@@ -183,6 +187,9 @@ void Game::gameStart()
         window.draw(obiekt->getSprite());
         window.draw(title);
         window.display();
+
+        elapsed = mainClock.getElapsedTime(); //get time measured
+        sleep((sf::milliseconds(1000/FRAMERATE) - mainClock.getElapsedTime()));
 
     }
 

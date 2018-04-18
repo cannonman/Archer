@@ -36,3 +36,8 @@ void Arrow::reset()
 {
     aSprite.setRotation(0);
 }
+
+bool Arrow::ifReleased()
+{
+    return Arrow::released;
+}

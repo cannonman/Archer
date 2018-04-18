@@ -24,12 +24,14 @@ class Arrow
         void changeAngleUp();
         void changeAngleDown();
         void reset();
+        bool ifReleased();
 
 
     protected:
 
     private:
         RectangleShape arrow;
+        bool released;
 };
 
 #endif // ARROW_H

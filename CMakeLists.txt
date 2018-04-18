@@ -10,6 +10,7 @@ add_executable(Archer
         include/Arrow.h
         include/game.h
         include/Player.h
+        include/Bow.h
         src/Arrow.cpp
         src/Bow.cpp
         src/game.cpp

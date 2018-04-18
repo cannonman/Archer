@@ -2,6 +2,8 @@
 #include <iostream>
 
 #define FRAMERATE 30
+#define MAX_ANGLE -90
+#define MIN_ANGLE 0
 
 using namespace std;
 
@@ -62,6 +64,8 @@ void Game::runGame()
 void Game::gameStart()
 {
 
+
+
    // Texture backgroundTexture;
    // Sprite backgroundSpirte;
 
@@ -87,14 +91,20 @@ void Game::gameStart()
 
             if (Event::KeyPressed && event.key.code == Keyboard::Up)
             {
-                luk->changeAngleUp();
-                strzala->changeAngleUp(); //lift bow  and arrow up
+                if (luk->getAngle()-2.5>=MAX_ANGLE) {
+                    luk->changeAngleUp();
+                    strzala->changeAngleUp(); //lift bow  and arrow up
+                }
+                cout << luk->getAngle() << endl;
             }
 
             if (Event::KeyPressed && event.key.code == Keyboard::Down)
             {
-                luk->changeAngleDown();
-                strzala->changeAngleDown(); //lift bow and arrow down
+                if (luk->getAngle()+2.5<=MIN_ANGLE) {
+                    luk->changeAngleDown();
+                    strzala->changeAngleDown(); //lift bow and arrow down
+                }
+                cout << luk->getAngle() << endl;
             }
 
             if (Mouse::isButtonPressed(Mouse::Left))
@@ -109,7 +119,7 @@ void Game::gameStart()
                 aimDirNorm = Vector2f(aimDir.x/x,aimDir.y/x);
                // cout<<strzaly.size()<<endl;
 
-
+                window.draw(test.getSprite());
 
                 strzaly.push_back(strzala);
                // cout<<strzaly.size()<<endl;

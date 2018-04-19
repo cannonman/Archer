@@ -352,6 +352,18 @@ void Game::options()
             powrot.setColor(Color::Red);
             else powrot.setColor(Color::White);
 
+         if(poziom.getGlobalBounds().contains(mouse))
+             poziom.setColor(Color::Red);
+        else poziom.setColor(Color::White);
+
+        if(poziom.getGlobalBounds().contains(mouse) && event.type == Event::MouseButtonReleased && event.key.code == Mouse::Button::Left)
+        {
+            if(diff==2) diff=0;
+                else diff++;
+                poziom.setString(str1[diff]);
+                poziom.setPosition(800/2-poziom.getGlobalBounds().width/2,250);
+                }
+
             window.clear();
 
             window.draw(title1);

@@ -1,6 +1,11 @@
-#include "game.h"
+//#include "game.h"
+#include "../include/game.h"
 #include <iostream>
+#include <cstring>
+#include <sstream>
 #include <math.h>
+
+#include"../include/Collision.h"
 
 #define _USE_MATH_DEFINES
 
@@ -62,6 +67,9 @@ void Game::runGame()
         case GameState::OPTIONS:
             options();
             break;
+            case GameState::GAME_OVER:
+                gameOver();
+                break;
 
         }
     }
@@ -73,7 +81,7 @@ void Game::gameStart()
 
     backgroundTexture.loadFromFile("jungle.png");
     backgroundSprite.setTexture(backgroundTexture); //load texture
-    points=0;
+    score=0;
         switch (diff)
         {
             case 0: time = 5;
@@ -85,14 +93,22 @@ void Game::gameStart()
             //default: time=5;
         }
 
-
-    while (state != END)
+        lives = 5;
+    while (state == GAME)
     {
 
 
         mainClock.restart(); //start time measure
         Text title ("Archer The Game",font,30);
-        Text punkty ("Punkty: ",font,15);
+        string points;
+        points = "Punkty: ";
+        stringstream ss, sa;
+        sa << lives;
+        ss<< score;
+        points+=ss.str();
+        points += " Zycia: ";
+        points += sa.str();
+        Text punkty(points ,font,15);
         title.setStyle(Text::Bold);
         title.setPosition(800/2-title.getGlobalBounds().width/2,20); //setting window options
         punkty.setPosition(10,10);
@@ -103,8 +119,6 @@ void Game::gameStart()
 
         while (window.pollEvent(event)) //wait for event
         {
-
-            //cout<<"EVENT"<<endl;
 
             vector.y = -ARROW_SPEED*(-sin((float)M_PI*(angle/180)));
             vector.x =ARROW_SPEED*cos ((float)M_PI*abs(angle/180));
@@ -118,7 +132,6 @@ void Game::gameStart()
             if (Event::KeyPressed && event.key.code == Keyboard::Up)
             {
                 if (angle-1.5>=MAX_ANGLE) {
-                        cout<<"UP"<<endl;
                     angle -=1.5;
                     luk->setAngle(angle);
                     if (!strzala->ifReleased()){
@@ -134,7 +147,6 @@ void Game::gameStart()
                 if (angle+1.5<=MIN_ANGLE) {
                     angle +=1.5;
                     luk->setAngle(angle);
-                    cout<<"w dol"<<endl;
 
                     if (!strzala->ifReleased()){
                         strzala->setAngle(angle); //lift bow and arrow down
@@ -167,16 +179,12 @@ void Game::gameStart()
 
         if (Collision::PixelPerfectTest(strzala->getSprite(),obiekt->getSprite()))
         {
-            //cout<<"Kolizja"<<endl;
-
-            points++;
+            score++;
 
             strzala->resetPosition();
             obiekt->resetPosition();
 
-           // cout<<"Punkty: "<<points<<", Czas: "<<time<<endl;
-
-            if (points%3==0&&time>1)
+            if (score%3==0&&time>1)
                 time--;
 
 
@@ -189,28 +197,25 @@ void Game::gameStart()
         window.draw(luk->getSprite());
         window.draw(strzala->getSprite());
 
+        obiekt->objMove(3);
         if (a==0)
         {
         if (obiekt->aSprite.getPosition().y<600&& czas(clock())%time==0)
         {
 
-            obiekt->objMove();
-
-           // cout<<a<<endl;
+            obiekt->objMove(5-time);
 
             a++;
-           // cout<<a<<endl;
-
-
-
-
 
         }
         if (obiekt->aSprite.getPosition().y>600)
         {
-            //cout<<"Obiekt poza obszarem, koniec gry"<<endl;
+            obiekt->resetPosition();
+            lives--;
+            if (lives==0)
             state = GAME_OVER;
         }
+
         }
         else if(czas(clock())%time!=0) {a=0;}
 
@@ -218,6 +223,7 @@ void Game::gameStart()
 
             strzala->aSprite.move(vector);
         }
+
 
         window.draw(strzala->getSprite());
         window.draw(obiekt->getSprite());
@@ -228,12 +234,75 @@ void Game::gameStart()
         elapsed = mainClock.getElapsedTime(); //get time measured
         sleep((sf::milliseconds(1000/FRAMERATE) - mainClock.getElapsedTime()));
 
+        if (lives==0)
+            state=GAME_OVER;
+
     }
 
 }
 
+void Game::gameOver(){
+    backgroundTexture.loadFromFile("jungle.png");
+    backgroundSprite.setTexture(backgroundTexture); //load texture
+    Text title;
+    Text title2;
+    Text powrot;
+    title.setStyle(Text::Bold);
+    title.setPosition(300, 50);
+    title.setString("Koniec Gry");
+    title.setFont(font);
+    title.setCharacterSize(40);
+
+    string points;
+    stringstream ss;
+    ss<< score;
+    points+=ss.str();
+    points+=" punktow";
+
+    title2.setStyle(Text::Bold);
+    title2.setPosition(300, 190);
+    title2.setString(points);
+    title2.setFont(font);
+    title2.setCharacterSize(40);
+
+    powrot.setStyle(Text::Bold);
+    powrot.setPosition(325, 400);
+    powrot.setString("Powrot");
+    powrot.setFont(font);
+    powrot.setCharacterSize(40);
+
+    while (state==GAME_OVER){
+
+        Vector2f mouse(Mouse::getPosition(window));
+
+        Event event;
+
+        while (window.pollEvent(event))
+        {
+            if (event.type==Event::Closed || Event::KeyPressed && event.key.code == Keyboard::Escape)
+                state = END;
+
+            else if (powrot.getGlobalBounds().contains(mouse) && event.type == Event::MouseButtonReleased
+                     && event.key.code== Mouse::Left)
+                state = MENU;
 
 
+        }
+
+
+        if(powrot.getGlobalBounds().contains(mouse))
+            powrot.setColor(Color::Red);
+        else powrot.setColor(Color::White);
+
+        window.clear();
+        window.draw(title);
+        window.draw(title2);
+        window.draw(powrot);
+        window.setVisible(true);
+
+        window.display();
+    }
+}
 
 void Game::options()
 {
@@ -277,22 +346,7 @@ void Game::options()
                        && event.key.code== Mouse::Left)
                         state = MENU;
 
-            if(poziom.getGlobalBounds().contains(mouse) && event.type == Event::MouseButtonReleased && event.key.code == Mouse::Left)
-            {
-                if(diff==2) diff=0;
-                else diff++;
-                poziom.setString(str1[diff]);
-                poziom.setPosition(800/2-poziom.getGlobalBounds().width/2,250);
-                cout<<diff<<endl;
-
-            }
-
-
         }
-
-            if(poziom.getGlobalBounds().contains(mouse))
-            poziom.setColor(Color::Red);
-            else poziom.setColor(Color::White);
 
             if(powrot.getGlobalBounds().contains(mouse))
             powrot.setColor(Color::Red);

@@ -2,13 +2,20 @@
  * File:   collision.cpp
  * Author: Nick (original version), ahnonay (SFML2 compatibility)
  */
-#include <SFML\Graphics.hpp>
+
+//#include <SFML\Graphics.hpp>
 #include <map>
-#include "Collision.h"
+#include <SFML/Graphics/Image.hpp>
+#include <SFML/Graphics/Texture.hpp>
+
+//#include "Collision.h"
+#include "../include/Collision.h"
 
 namespace Collision
 {
-	class BitmaskManager
+
+
+    class BitmaskManager
 	{
 	public:
 		~BitmaskManager() {
@@ -18,7 +25,7 @@ namespace Collision
 		}
 
 		sf::Uint8 GetPixel (const sf::Uint8* mask, const sf::Texture* tex, unsigned int x, unsigned int y) {
-			if (x>tex->getSize().x||y>tex->getSize().y)
+			if (x > tex->getSize().x || y > tex->getSize().y )
 				return 0;
 
 			return mask[x+y*tex->getSize().x];

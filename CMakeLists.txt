@@ -11,10 +11,12 @@ add_executable(Archer
         include/game.h
         include/Player.h
         include/Bow.h
+        include/Collision.h
         src/Arrow.cpp
         src/Bow.cpp
         src/game.cpp
         src/Player.cpp
+        src/Collision.cpp
         arial.ttf
         arrowDef.png
         bowNormal.png

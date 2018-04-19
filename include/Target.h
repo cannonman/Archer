@@ -24,7 +24,7 @@ public:
     int getX();
     int getY();
 
-    void objMove();
+    void objMove(int move);
     void resetPosition();
     Vector2f objPos();
 private:

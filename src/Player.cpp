@@ -1,5 +1,5 @@
-#include "Player.h"
-
+//#include "Player.h"
+#include "../include/Player.h"
 Player::Player(float startX, float startY)
 {
     pTexture.loadFromFile("pirate.png");

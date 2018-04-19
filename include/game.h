@@ -61,12 +61,14 @@ class Game
         void menu();
         void options();
         void gameStart();
+        void gameOver();
         int czas(clock_t t);
         int a=0;
-        int points;
+        int score;
         float angle;
         int time;
         int diff;
+        int lives;
 };
 
 #endif // GAME_H

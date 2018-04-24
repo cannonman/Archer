@@ -7,7 +7,8 @@ Bow::Bow(float wX, float wY)
     bSprite.setTexture(bTexture);
 
     bSprite.setPosition(wX,wY);
-    angle=0;
+    bSprite.setRotation(0);
+    angle = 0;
 
 }
 

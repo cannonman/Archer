@@ -18,7 +18,7 @@
 
 using namespace std;
 
-RenderWindow window(VideoMode(800,600),"Archer The Game");
+RenderWindow window(VideoMode(800,600),"Archer the Game");
 
 
 Game::Game()
@@ -29,12 +29,17 @@ Game::Game()
 
     luk = new Bow (84,340);
 
+    luk->reset();
+
     strzala = new Arrow(84, 340);
+    strzala->resetPosition();
 
     obiekt = new Target (550,10);
 
     diff=0;
     time=5;
+
+    angle=0;
 
     if(!font.loadFromFile("arial.ttf"))
     {
@@ -99,7 +104,7 @@ void Game::gameStart()
 
 
         mainClock.restart(); //start time measure
-        Text title ("Archer The Game",font,30);
+        Text title ("kiedys to kuwa byy betatesty",font,30);
         string points;
         points = "Punkty: ";
         stringstream ss, sa;
@@ -165,11 +170,13 @@ void Game::gameStart()
              if (strzala->aSprite.getPosition().x < 0 || strzala->aSprite.getPosition().x > window.getSize().x) {
                     delete strzala;
                     strzala = new Arrow(84, 340);
+                    strzala->resetPosition();
                     strzala->setAngle(angle);
                 }
                 if (strzala->aSprite.getPosition().y < 0 || strzala->aSprite.getPosition().y > window.getSize().y) {
                     delete strzala;
                     strzala = new Arrow(84, 340);
+                    strzala->resetPosition();
                     strzala->setAngle(angle);
                 }
 
@@ -182,7 +189,9 @@ void Game::gameStart()
             score++;
 
             strzala->resetPosition();
+            cout << "przed" << endl;
             obiekt->resetPosition();
+            cout << "po" << endl;
 
             if (score%3==0&&time>1)
                 time--;
@@ -198,9 +207,9 @@ void Game::gameStart()
         window.draw(strzala->getSprite());
 
         obiekt->objMove(3);
-        if (a==0)
-        {
-        if (obiekt->aSprite.getPosition().y<600&& czas(clock())%time==0)
+  //      if (a==0)
+    //    {
+        if (obiekt->aSprite.getPosition().y<600)
         {
 
             obiekt->objMove(5-time);
@@ -208,15 +217,17 @@ void Game::gameStart()
             a++;
 
         }
-        if (obiekt->aSprite.getPosition().y>600)
+        if (obiekt->aSprite.getPosition().y>=600)
         {
+            cout << "przed" << endl;
             obiekt->resetPosition();
+            cout << "po" << endl;
             lives--;
             if (lives==0)
             state = GAME_OVER;
         }
 
-        }
+      //  }
         else if(czas(clock())%time!=0) {a=0;}
 
         if (strzala->ifReleased()){

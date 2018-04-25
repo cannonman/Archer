@@ -89,11 +89,11 @@ void Game::gameStart()
     score=0;
         switch (diff)
         {
-            case 0: time = 5;
+            case 0: time = 6;
             break;
-            case 1: time = 4;
+            case 1: time = 5;
             break;
-            case 2: time = 2;
+            case 2: time = 4;
             break;
             //default: time=5;
         }
@@ -104,7 +104,7 @@ void Game::gameStart()
 
 
         mainClock.restart(); //start time measure
-        Text title ("kiedys to kuwa byy betatesty",font,30);
+        Text title ("Archer the Game",font,30);
         string points;
         points = "Punkty: ";
         stringstream ss, sa;
@@ -172,12 +172,14 @@ void Game::gameStart()
                     strzala = new Arrow(84, 340);
                     strzala->resetPosition();
                     strzala->setAngle(angle);
+                    window.draw(strzala->getSprite());
                 }
                 if (strzala->aSprite.getPosition().y < 0 || strzala->aSprite.getPosition().y > window.getSize().y) {
                     delete strzala;
                     strzala = new Arrow(84, 340);
                     strzala->resetPosition();
                     strzala->setAngle(angle);
+                    window.draw(strzala->getSprite());
                 }
 
             }
@@ -189,9 +191,7 @@ void Game::gameStart()
             score++;
 
             strzala->resetPosition();
-            cout << "przed" << endl;
             obiekt->resetPosition();
-            cout << "po" << endl;
 
             if (score%3==0&&time>1)
                 time--;

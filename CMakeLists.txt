@@ -20,6 +20,7 @@ add_executable(Archer
         arial.ttf
         arrowDef.png
         bowNormal.png
+        apple.png
         jungle.png
         lucznik.cbp
         lucznik.cscope_file_list
